@@ -1,0 +1,39 @@
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'javafx-gradle-plugin'
+
+group 'xyz.faizaan'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.apache.poi:poi:4.0.1'
+    compile "org.apache.poi:poi-ooxml:4.0.1"
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+}
+
+jfx {
+    mainClass = 'xyz.faizaan.sijpadonatebot.Main'
+    vendor = 'Faizaan Datoo'
+    additionalAppResources = 'src/main/resources'
+    bundleArguments = [
+            runtime: null,
+            licenseFile: 'license.rtf'
+    ]
+}
