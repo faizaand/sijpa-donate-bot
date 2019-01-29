@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="xyz.faizaan.sijpa-donate-bot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/xyz_faizaan_sijpa_donate_bot_jar</output-path>
+    <root id="archive" name="xyz.faizaan.sijpa-donate-bot.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

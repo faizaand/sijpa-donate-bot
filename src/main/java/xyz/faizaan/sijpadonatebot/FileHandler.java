@@ -49,7 +49,6 @@ public class FileHandler {
             modifyOne(spreadsheet, i);
 
         System.out.println("Done");
-        System.exit(0);
     }
 
     private Map<String, List<String>> readSpreadsheet() throws IOException {
