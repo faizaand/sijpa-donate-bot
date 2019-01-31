@@ -2,14 +2,22 @@ package xyz.faizaan.sijpadonatebot;
 
 import com.xandryex.WordReplacer;
 import org.apache.commons.lang3.Validate;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.*;
+import org.apache.xmlbeans.XmlException;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +34,14 @@ import java.util.regex.Pattern;
 public class FileHandler {
 
     private File spreadsheet, template, outputDir;
-    private String fileNameFormat;
+    private LocalDate letterDateFormat;
 
-    public FileHandler(String fileNameFormat, File spreadsheet, File template, File outputDir) {
+    public FileHandler(LocalDate letterDateFormat, File spreadsheet, File template, File outputDir) {
         Validate.isTrue(spreadsheet.isFile(), "The location provided for the spreadsheet is not a file!");
         Validate.isTrue(template.isFile(), "The location provided for the template is not a file!");
         Validate.isTrue(outputDir.isDirectory(), "The output directory provided is not a directory!");
 
-        this.fileNameFormat = fileNameFormat;
+        this.letterDateFormat = letterDateFormat;
         this.spreadsheet = spreadsheet;
         this.template = template;
         this.outputDir = outputDir;
@@ -42,71 +50,74 @@ public class FileHandler {
     /**
      * Process the files, putting the results in the output directory.
      */
-    public void process() throws IOException {
-        Map<String, List<String>> spreadsheet = readSpreadsheet();
 
-        for(int i = 0; i < spreadsheet.values().iterator().next().size(); i++)
-            modifyOne(spreadsheet, i);
+    public boolean modifyOne(ExcelHandler handler, String name) throws IOException, XmlException {
+        Donor donor = handler.getDonorInfo(name);
+        if(donor == null) return false; //skipping
 
-        System.out.println("Done");
-    }
-
-    private Map<String, List<String>> readSpreadsheet() throws IOException {
-        List<List<String>> rawData = new ArrayList<>();
-
-        Workbook workbook = WorkbookFactory.create(spreadsheet);
-        Sheet sheet = workbook.getSheetAt(0); // we only deal with the first sheet for now
-
-        for (Row row : sheet) {
-            int colIndex = 0;
-            for (Cell cell : row) {
-                if (colIndex >= rawData.size()) rawData.add(new ArrayList<>());
-                List<String> col = rawData.get(colIndex);
-
-                if (cell.getCellType() == CellType.NUMERIC) col.add(String.valueOf(cell.getNumericCellValue()));
-                if (cell.getCellType() == CellType.STRING) col.add(String.valueOf(cell.getStringCellValue()));
-
-                colIndex++;
-            }
-        }
-
-        Map<String, List<String>> formattedData = new HashMap<>();
-        for (List<String> column : rawData) {
-            List<String> values = column.subList(1, column.size());
-            formattedData.put(column.get(0), values);
-        }
-
-        return formattedData;
-    }
-
-    private void modifyOne(Map<String, List<String>> spreadsheet, int columnNum) throws IOException {
-        String fileName = fileNameFormat;
-
-        Pattern p = Pattern.compile("\\[(.*?)]");
-        Matcher m = p.matcher(fileNameFormat);
-        while (m.find()) {
-            String columnName = m.group(1);
-            if (!spreadsheet.containsKey(columnName) || spreadsheet.get(columnName).size() < columnNum)
-                fileName = fileName.replace(columnName, "undefined");
-            fileName = fileName.replace(columnName, spreadsheet.get(columnName).get(columnNum));
-        }
-        fileName = fileName.replace("[", "").replace("]", "");
+        String fileName = donor.firstName + " " + donor.lastName + ".docx";
 
         File newFile = new File(outputDir, fileName);
         newFile = Files.copy(template.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING).toFile();
 
         WordReplacer wordReplacer = new WordReplacer(newFile);
-        for (String columnName : spreadsheet.keySet()) {
-            String searchTerm = "[" + columnName + "]";
-            List<String> col = spreadsheet.get(columnName);
-            if(col.size() < columnNum)
-                wordReplacer.replaceWordsInText(searchTerm, "undefined");
-            else
-                wordReplacer.replaceWordsInText(searchTerm, col.get(columnNum));
-        }
+        wordReplacer.replaceWordsInText("[LetterDate]", letterDateFormat.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+        wordReplacer.replaceWordsInText("[LetterYear]", letterDateFormat.format(DateTimeFormatter.ofPattern("yyyy")));
+        wordReplacer.replaceWordsInText("[First Name]", donor.firstName);
+        wordReplacer.replaceWordsInText("[First Name]", donor.firstName);
+        wordReplacer.replaceWordsInText("[First Name]", donor.firstName);
+        wordReplacer.replaceWordsInText("[Last Name]", donor.lastName);
+        wordReplacer.replaceWordsInText("[Address]", donor.address);
+        wordReplacer.replaceWordsInText("[City]", donor.city);
+        wordReplacer.replaceWordsInText("[State]", donor.state);
+        wordReplacer.replaceWordsInText("[Zip Code]", donor.zipCode);
+
+        Transaction transaction1 = donor.transactions.get(0);
+        wordReplacer.replaceWordsInTables("[Date1]", transaction1.date);
+        wordReplacer.replaceWordsInTables("[Amount1]", escapeAllDollars(transaction1.amount));
+        wordReplacer.replaceWordsInTables("[Type1]", transaction1.type);
+        wordReplacer.replaceWordsInTables("[Desc1]", transaction1.subcategory.isEmpty() ? escapeAllDollars(transaction1.category) : escapeAllDollars(transaction1.subcategory));
 
         wordReplacer.saveAndGetModdedFile(newFile);
 
+        // table transactions
+        FileInputStream stream = new FileInputStream(newFile);
+        XWPFDocument doc = new XWPFDocument(stream);
+        XWPFTable table = doc.getTableArray(1);
+
+        //insert new row, which is a copy of row 2, as new row 3:
+        for(int i = 0; i < donor.transactions.size() - 1; i++) {
+            int rowId = i + 2;
+
+            XWPFTableRow oldRow = table.getRow(1);
+            CTRow ctrow = CTRow.Factory.parse(oldRow.getCtRow().newInputStream());
+            XWPFTableRow newRow = new XWPFTableRow(ctrow, table);
+
+            int cellId = 0;
+            Transaction trans = donor.transactions.get(rowId - 1);
+            for (XWPFTableCell cell : newRow.getTableCells()) {
+                for (XWPFParagraph paragraph : cell.getParagraphs()) {
+                    for (XWPFRun run : paragraph.getRuns()) {
+                        cellId++;
+                        if(cellId == 1) run.setText(trans.date, 0);
+                        if(cellId == 2) run.setText(trans.amount, 0);
+                        if(cellId == 3) run.setText(trans.type, 0);
+                        if(cellId == 4) run.setText(trans.subcategory.isEmpty() ? trans.category : trans.subcategory, 0);
+                    }
+                }
+            }
+
+            table.addRow(newRow, rowId);
+        }
+
+        doc.write(new FileOutputStream(newFile));
+        doc.close();
+
+        return true;
+    }
+
+    private String escapeAllDollars(String in) {
+        return in.replace("$", "\\$");
     }
 
 }
