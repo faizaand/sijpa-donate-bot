@@ -5,23 +5,23 @@
       <artifact name="xyz.faizaan.sijpa-donate-bot:jar" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0767d6af-18a9-42dd-8b18-f862403f0cf5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/Donor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/ExcelHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/ProgressForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/Transaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sijpa-donate-bot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/scenes/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/scenes/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/ExcelHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/ExcelHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scenes/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/scenes/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/faizaan/sijpadonatebot/Transaction.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/.gradle/" />
-    <ignored path="$PROJECT_DIR$/build/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -220,6 +220,7 @@
     <option name="width" value="1545" />
     <option name="height" value="1100" />
   </component>
+  <component name="ProjectId" id="1nEHVWwx6C7m83U8JLk7qkQQaoy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -305,7 +306,14 @@
       <pane id="PackagesPane" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548792729714" />
@@ -315,37 +323,22 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\fdato\OneDrive\Documents\sijpa-donate-bot\src\main\java" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="xyz.faizaan.sijpadonatebot.Main" />
-      <module name="xyz.faizaan.sijpa-donate-bot.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="xyz.faizaan.sijpadonatebot.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <module name="sijpa-donate-bot.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -366,7 +359,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="sijpa-donate-bot [jfxJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -385,7 +380,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="sijpa-donate-bot [jfxNative]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -404,7 +401,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -416,6 +415,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -430,6 +430,9 @@
       <workItem from="1548785258736" duration="6841000" />
       <workItem from="1548879696860" duration="10849000" />
       <workItem from="1548895604814" duration="1988000" />
+      <workItem from="1610948360227" duration="89000" />
+      <workItem from="1610948451753" duration="535000" />
+      <workItem from="1610949009590" duration="776000" />
     </task>
     <task id="LOCAL-00001" summary="Working file handler, still needs UI">
       <created>1548630122814</created>
@@ -483,7 +486,19 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Working file handler, still needs UI" />

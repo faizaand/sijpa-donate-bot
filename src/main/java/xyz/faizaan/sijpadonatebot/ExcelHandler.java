@@ -70,6 +70,7 @@ public class ExcelHandler {
         Transaction transaction = new Transaction();
         transaction.amount = set.getField("Amount");
         transaction.type = set.getField("Type");
+        transaction.checkNum = set.getField("Check Number");
         transaction.date = set.getField("Date");
         transaction.category = set.getField("Class");
         transaction.subcategory = set.getField("Sub Class");

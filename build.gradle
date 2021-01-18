@@ -24,9 +24,9 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.0.2'
-    compile 'org.apache.poi:poi:3.6.0'
-    compile "org.apache.poi:poi-ooxml:3.6.0"
-    compile 'com.codoid.products:fillo:1.18'
+    compile 'org.apache.poi:poi:4.1.2'
+    compile "org.apache.poi:poi-ooxml:4.1.2"
+    compile 'com.codoid.products:fillo:1.21'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
 }
 

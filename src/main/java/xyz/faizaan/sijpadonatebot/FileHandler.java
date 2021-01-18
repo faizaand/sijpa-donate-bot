@@ -76,6 +76,7 @@ public class FileHandler {
         wordReplacer.replaceWordsInTables("[Date1]", transaction1.date);
         wordReplacer.replaceWordsInTables("[Amount1]", escapeAllDollars(transaction1.amount));
         wordReplacer.replaceWordsInTables("[Type1]", transaction1.type);
+        wordReplacer.replaceWordsInTables("[Chknum1]", transaction1.checkNum);
         wordReplacer.replaceWordsInTables("[Desc1]", transaction1.subcategory.isEmpty() ? escapeAllDollars(transaction1.category) : escapeAllDollars(transaction1.subcategory));
 
         wordReplacer.saveAndGetModdedFile(newFile);
